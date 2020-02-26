@@ -50,12 +50,13 @@ class PhotoViewHolder extends ViewHolder {
         this.likes.setText(String.format(Locale.ENGLISH, "likes: %d", photo.likes));
         this.views.setText(String.format(Locale.ENGLISH, "votes: %d", photo.views));
         this.image.setTransitionName("image" + this.position);
-//        String imageUrl = buildImageUrl(photo);
-//        Picasso.get()
-//                .load(imageUrl)
+
+        String imageUrl = buildImageUrl(photo);
+        Picasso.get()
+                .load(imageUrl)
 //                .centerCrop()
 //                .resize(500, 300) //required
-//                .into(image);
+                .into(image);
 
         this.hart.setImageResource(photo.liked ? R.drawable.filled_hart : R.drawable.empty_hart);
     }

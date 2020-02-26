@@ -21,7 +21,7 @@ public class PhotosListAdapter extends Adapter<PhotoViewHolder> {
 
     PhotosListAdapter(IFragAPresenter photosPresenter) {
         this.photosPresenter = photosPresenter;
-        photosPresenter.setListAdapter(this);
+        this.photosPresenter.setListAdapter(this);
     }
 
     void setPhotoList(PhotoList photoList) {

@@ -20,7 +20,6 @@ import static android.view.View.*;
 
 public class FragB extends Fragment implements IFragBView {
 
-    private final int position;
     private IFragBPresenter mPresenter;
     private TextView title;
     private TextView likes;
@@ -30,8 +29,7 @@ public class FragB extends Fragment implements IFragBView {
 
     private Animation zoomToFull;
 
-    public FragB(int position) {
-        this.position = position;
+    public FragB() {
     }
 
     @Override
@@ -44,7 +42,8 @@ public class FragB extends Fragment implements IFragBView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_b, container, false);
         findViews(view);
-        this.image.setTransitionName("image" + this.position);
+        this.image.setTransitionName(getArguments().getString(getString(R.string.transition_name)));
+
         view.setOnClickListener(v -> mPresenter.onOutsideImageClicked());
 
         return view;
