@@ -1,7 +1,6 @@
-package com.yulin.ivan.gurutest.ui.fraga;
+package com.yulin.ivan.gurutest.ui.a_frag;
 
 import android.content.Context;
-import android.view.View;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelStoreOwner;

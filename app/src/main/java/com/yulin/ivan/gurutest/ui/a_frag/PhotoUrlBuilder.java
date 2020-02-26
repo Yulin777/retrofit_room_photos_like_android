@@ -1,4 +1,4 @@
-package com.yulin.ivan.gurutest.ui.fraga;
+package com.yulin.ivan.gurutest.ui.a_frag;
 
 /**
  * Created by Ivan Y. on 2020-02-24.

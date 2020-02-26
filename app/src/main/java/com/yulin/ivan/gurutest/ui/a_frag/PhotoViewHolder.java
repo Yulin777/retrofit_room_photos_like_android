@@ -1,4 +1,4 @@
-package com.yulin.ivan.gurutest.ui.fraga;
+package com.yulin.ivan.gurutest.ui.a_frag;
 
 import android.view.View;
 import android.widget.ImageView;

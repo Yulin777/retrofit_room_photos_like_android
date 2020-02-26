@@ -1,4 +1,4 @@
-package com.yulin.ivan.gurutest.ui.fraga;
+package com.yulin.ivan.gurutest.ui.a_frag;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

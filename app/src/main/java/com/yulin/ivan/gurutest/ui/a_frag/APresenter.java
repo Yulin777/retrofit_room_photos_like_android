@@ -1,4 +1,4 @@
-package com.yulin.ivan.gurutest.ui.fraga;
+package com.yulin.ivan.gurutest.ui.a_frag;
 
 import android.content.Context;
 
@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import com.yulin.ivan.gurutest.R;
 import com.yulin.ivan.gurutest.data.PhotoViewModel;
 import com.yulin.ivan.gurutest.data.entity.Photo;
-import com.yulin.ivan.gurutest.ui.fragb.BFrag;
-import com.yulin.ivan.gurutest.ui.fragb.BPresenter;
+import com.yulin.ivan.gurutest.ui.b_frag.BFrag;
+import com.yulin.ivan.gurutest.ui.b_frag.BPresenter;
 
 import java.util.function.Consumer;
 

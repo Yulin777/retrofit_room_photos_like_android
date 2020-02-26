@@ -1,4 +1,4 @@
-package com.yulin.ivan.gurutest.ui.mainactivity;
+package com.yulin.ivan.gurutest.ui.main_activity;
 
 import android.os.Bundle;
 
@@ -7,10 +7,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.yulin.ivan.gurutest.R;
-import com.yulin.ivan.gurutest.ui.fraga.AFrag;
-import com.yulin.ivan.gurutest.ui.fraga.APresenter;
+import com.yulin.ivan.gurutest.ui.a_frag.AFrag;
+import com.yulin.ivan.gurutest.ui.a_frag.APresenter;
 
-public class MainActivity extends AppCompatActivity implements IBaseView {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,6 @@ public class MainActivity extends AppCompatActivity implements IBaseView {
                 .commit();
 
         APresenter APresenter = new APresenter(this, AFrag);
-    }
-
-    @Override
-    public ViewModelStoreOwner getStoreOwner() {
-        return this;
     }
 
     @Override

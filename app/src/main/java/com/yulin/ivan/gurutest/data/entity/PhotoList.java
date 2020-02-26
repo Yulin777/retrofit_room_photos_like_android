@@ -1,7 +1,7 @@
 package com.yulin.ivan.gurutest.data.entity;
 
 import com.google.gson.annotations.SerializedName;
-import com.yulin.ivan.gurutest.ui.fraga.PhotoUrlBuilder;
+import com.yulin.ivan.gurutest.ui.a_frag.PhotoUrlBuilder;
 
 import java.util.ArrayList;
 

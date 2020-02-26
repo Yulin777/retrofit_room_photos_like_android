@@ -1,4 +1,4 @@
-package com.yulin.ivan.gurutest.ui.fragb;
+package com.yulin.ivan.gurutest.ui.b_frag;
 
 import com.yulin.ivan.gurutest.data.entity.Photo;
 
