@@ -48,16 +48,9 @@ public class PhotosListAdapter extends Adapter<PhotoViewHolder> {
         return photosList == null ? 0 : photosList.size();
     }
 
-    void onPhotoLiked(Photo photo, int position) {
-        photosList.get(position).liked = photo.liked;
-        notifyItemChanged(position);
-    }
-
     void setPhotoListFromDB() {
         LiveData<List<Photo>> photosObserver = photoViewModel.getAllPhotos();
-        photosObserver.observe(mPresenter.getLifeCycleOwner(), photos -> {
-            photosObserver.removeObservers(mPresenter.getLifeCycleOwner()); //avoid refreshing whole list on single item change
-
+        photosObserver.observeForever(photos -> {
             this.photosList = photos;
             notifyDataSetChanged();
         });

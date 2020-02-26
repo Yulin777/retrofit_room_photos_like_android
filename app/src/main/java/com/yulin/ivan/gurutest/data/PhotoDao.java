@@ -19,7 +19,7 @@ public interface PhotoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<Photo> photoList);
 
-    @Query("SELECT * FROM photos_table")
+    @Query("SELECT * FROM photos_table ORDER BY likes DESC")
     LiveData<List<Photo>> getAllPhotos();
 
     @Query("SELECT * FROM photos_table WHERE id=:id LIMIT 1")
