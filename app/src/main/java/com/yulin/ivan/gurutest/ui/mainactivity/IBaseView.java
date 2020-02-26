@@ -12,6 +12,6 @@ public interface IBaseView {
 
     ViewModelStoreOwner getStoreOwner();
 
-    void openFragB(Photo photo, int position);
+//    void openFragB(Photo photo, int position);
 
 }

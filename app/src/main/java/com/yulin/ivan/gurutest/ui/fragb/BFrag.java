@@ -13,14 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.yulin.ivan.gurutest.R;
+import com.yulin.ivan.gurutest.data.entity.Photo;
 
-import static android.view.View.*;
+import java.util.Locale;
 
-public class FragB extends Fragment implements IFragBView {
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
-    private IFragBPresenter mPresenter;
+public class BFrag extends Fragment implements IBView {
+
+    private IBPresenter mPresenter;
     private TextView title;
     private TextView likes;
     private TextView views;
@@ -29,7 +34,7 @@ public class FragB extends Fragment implements IFragBView {
 
     private Animation zoomToFull;
 
-    public FragB() {
+    public BFrag() {
     }
 
     @Override
@@ -42,9 +47,8 @@ public class FragB extends Fragment implements IFragBView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_b, container, false);
         findViews(view);
-        this.image.setTransitionName(getArguments().getString(getString(R.string.transition_name)));
-
         view.setOnClickListener(v -> mPresenter.onOutsideImageClicked());
+        mPresenter.incrementViews();
 
         return view;
     }
@@ -65,32 +69,8 @@ public class FragB extends Fragment implements IFragBView {
     }
 
     @Override
-    public void setmPresenter(IFragBPresenter mPresenter) {
+    public void setPresenter(IBPresenter mPresenter) {
         this.mPresenter = mPresenter;
-    }
-
-    @Override
-    public void setTitle(String title) {
-        this.title.setText(title);
-    }
-
-    @Override
-    public void setLikes(int likes) {
-        this.likes.setText(String.valueOf(likes));
-    }
-
-    @Override
-    public void setViews(int views) {
-        this.views.setText(String.valueOf(views));
-    }
-
-    @Override
-    public void setImage(String imageUrl) {
-//        Picasso.get()
-//                .load(imageUrl)
-//                .centerCrop()
-//                .resize(500, 500)
-//                .into(image);
     }
 
     @Override
@@ -101,13 +81,31 @@ public class FragB extends Fragment implements IFragBView {
     }
 
     @Override
-    public void setHart(boolean liked) {
-        this.hart.setImageResource(liked ? R.drawable.filled_hart : R.drawable.empty_hart);
+    public void finishSelf() {
+        getActivity().onBackPressed();
     }
 
     @Override
-    public void finishSelf() {
-        getActivity().onBackPressed();
+    public void updateUI(Photo photo) {
+        this.title.setText(photo.title);
+        this.likes.setText(String.format(Locale.ENGLISH, "likes: %d", photo.likes));
+        this.views.setText(String.format(Locale.ENGLISH, "votes: %d", photo.views));
+        this.hart.setImageResource(photo.liked ? R.drawable.filled_hart : R.drawable.empty_hart);
+
+        Picasso.get().load(photo.imageUrl)
+                .centerCrop()
+                .resize(300, 300) //required
+                .into(image, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        image.setAlpha(0f);
+                        image.animate().setDuration(400).alpha(1f).start();
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                    }
+                });
     }
 
 

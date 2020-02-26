@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="#aa000000"
-    tools:context=".ui.fragb.FragB">
+    tools:context=".ui.fragb.BFrag">
 
     <ImageView
         android:id="@+id/image"

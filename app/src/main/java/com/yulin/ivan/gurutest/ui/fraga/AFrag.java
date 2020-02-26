@@ -4,20 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelStoreOwner;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yulin.ivan.gurutest.R;
 
-public class FragA extends Fragment implements IFragAView {
-    private IFragAPresenter presenter;
+public class AFrag extends Fragment implements IAView {
+    private IAPresenter presenter;
     private RecyclerView recyclerView;
 
     @Override
@@ -38,7 +37,6 @@ public class FragA extends Fragment implements IFragAView {
     }
 
     private void setViews() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new PhotosListAdapter(presenter));
     }
 
@@ -59,11 +57,13 @@ public class FragA extends Fragment implements IFragAView {
     }
 
     @Override
-    public void setPresenter(IFragAPresenter photosPresenter) {
+    public void setPresenter(IAPresenter photosPresenter) {
         this.presenter = photosPresenter;
     }
 
-    public ImageView getSharedImage(int position) {
-        return recyclerView.getLayoutManager().findViewByPosition(position).findViewById(R.id.image);
+    @Override
+    public LifecycleOwner getLifeCycleOwner() {
+        return this;
     }
+
 }

@@ -5,52 +5,61 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 
 import com.yulin.ivan.gurutest.R;
+import com.yulin.ivan.gurutest.data.PhotoViewModel;
 import com.yulin.ivan.gurutest.data.entity.Photo;
-import com.yulin.ivan.gurutest.data.entity.PhotoList;
+
+import java.util.List;
 
 /**
  * Created by Ivan Y. on 2020-02-24.
  */
 
 public class PhotosListAdapter extends Adapter<PhotoViewHolder> {
-    private final IFragAPresenter photosPresenter;
-    private PhotoList photoList;
+    private final IAPresenter mPresenter;
+    private PhotoViewModel photoViewModel;
+    private List<Photo> photosList;
 
-    PhotosListAdapter(IFragAPresenter photosPresenter) {
-        this.photosPresenter = photosPresenter;
-        this.photosPresenter.setListAdapter(this);
-    }
-
-    void setPhotoList(PhotoList photoList) {
-        this.photoList = photoList;
-        notifyDataSetChanged();
+    PhotosListAdapter(IAPresenter photosPresenter) {
+        this.mPresenter = photosPresenter;
+        this.mPresenter.setListAdapter(this);
+        this.photoViewModel = new ViewModelProvider(mPresenter.getStoreOwner()).get(PhotoViewModel.class);
     }
 
     @NonNull
     @Override
     public PhotoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CardView cardView = (CardView) LayoutInflater.from(photosPresenter.getContext())
-                .inflate(R.layout.photo_list_item, parent, false);
-
-        return new PhotoViewHolder(cardView, photosPresenter);
+        CardView cardView = (CardView) LayoutInflater.from(mPresenter.getContext()).inflate(R.layout.photo_list_item, parent, false);
+        return new PhotoViewHolder(cardView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PhotoViewHolder holder, int position) {
-        holder.setData(photoList.get(position), position);
-        holder.itemView.setOnClickListener(v -> photosPresenter.onItemClicked(photoList.get(position), position));
+        mPresenter.observePhoto(photosList.get(position).id, holder::updateUI);
+        holder.itemView.setOnClickListener(v -> mPresenter.onItemClicked(photosList.get(position), position));
     }
 
     @Override
     public int getItemCount() {
-        return photoList == null ? 0 : photoList.size();
+        return photosList == null ? 0 : photosList.size();
     }
 
-    public void onPhotoLiked(Photo photo, int position) {
-        photoList.get(position).liked = photo.liked;
+    void onPhotoLiked(Photo photo, int position) {
+        photosList.get(position).liked = photo.liked;
         notifyItemChanged(position);
+    }
+
+    void setPhotoListFromDB() {
+        LiveData<List<Photo>> photosObserver = photoViewModel.getAllPhotos();
+        photosObserver.observe(mPresenter.getLifeCycleOwner(), photos -> {
+            photosObserver.removeObservers(mPresenter.getLifeCycleOwner()); //avoid refreshing whole list on single item change
+
+            this.photosList = photos;
+            notifyDataSetChanged();
+        });
     }
 }
