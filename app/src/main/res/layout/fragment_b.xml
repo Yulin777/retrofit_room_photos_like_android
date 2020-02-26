@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#aa000000"
+    tools:context=".ui.fragb.FragB">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@color/colorPrimaryDark" />
+
+    <!--    <ImageView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_alignBottom="@id/image"-->
+    <!--        android:tint="#6F000000" />-->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/image"
+        android:layout_alignTop="@id/photo_info"
+        android:layout_alignEnd="@id/image"
+        android:layout_alignBottom="@id/photo_info"
+        android:src="@drawable/shadow_bottom_up" />
+
+    <LinearLayout
+        android:id="@+id/photo_info"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@id/image"
+        android:backgroundTint="#6F000000"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:paddingStart="10dp"
+        android:paddingBottom="10dp">
+
+        <include layout="@layout/photo_data" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image"
+        android:gravity="center_horizontal"
+        android:text="tap image to like"
+        android:textColor="#ccc"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/hart"
+        android:layout_margin="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/image"
+        android:layout_alignBottom="@id/image"
+        android:layout_alignStart="@id/image"
+        android:layout_alignEnd="@id/image"
+        android:src="@drawable/filled_hart"
+        android:visibility="invisible" />
+
+</RelativeLayout>
