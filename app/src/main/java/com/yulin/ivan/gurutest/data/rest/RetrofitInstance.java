@@ -9,9 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
     private static Retrofit allPhotosInstance;
-    private static Retrofit SinglePhotoInstance;
     public static final String ALL_PHOTOS_BASE_URL = "https://api.gurushots.com/";
-    public static final String SINGLE_PHOTO_BASE_URL = "https://api.gurushots.com/";
 
     public static Retrofit getAllPhotosInstance() {
         if (allPhotosInstance == null) {
