@@ -2,7 +2,6 @@ package com.yulin.ivan.gurutest.ui.a_frag;
 
 import android.content.Context;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -50,11 +49,6 @@ public class APresenter implements IAPresenter {
     @Override
     public ViewModelStoreOwner getStoreOwner() {
         return mView.getStoreOwner();
-    }
-
-    @Override
-    public LifecycleOwner getLifeCycleOwner() {
-        return mView.getLifeCycleOwner();
     }
 
     @Override

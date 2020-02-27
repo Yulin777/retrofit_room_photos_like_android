@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,8 @@ import com.yulin.ivan.gurutest.data.entity.Photo;
 
 import java.util.Locale;
 
+import static android.view.View.*;
+import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
@@ -31,6 +34,7 @@ public class BFrag extends Fragment implements IBView {
     private TextView views;
     private ImageView image;
     private ImageView hart;
+    private ProgressBar busyIndicator;
 
     private Animation zoomToFull;
 
@@ -59,6 +63,7 @@ public class BFrag extends Fragment implements IBView {
         this.views = container.findViewById(R.id.views);
         this.image = container.findViewById(R.id.image);
         this.hart = container.findViewById(R.id.hart);
+        this.busyIndicator = container.findViewById(R.id.busy_indicator);
     }
 
     @Override
@@ -87,17 +92,20 @@ public class BFrag extends Fragment implements IBView {
 
     @Override
     public void updateUI(Photo photo) {
+        this.busyIndicator.setVisibility(VISIBLE);
         this.title.setText(photo.title);
         this.likes.setText(String.format(Locale.ENGLISH, "likes: %d", photo.likes));
         this.views.setText(String.format(Locale.ENGLISH, "votes: %d", photo.views));
         this.hart.setImageResource(photo.liked ? R.drawable.filled_hart : R.drawable.empty_hart);
 
-        Picasso.get().load(photo.imageUrl)
+        Picasso.get()
+                .load(photo.imageUrl)
                 .centerCrop()
                 .resize(300, 300) //required
                 .into(image, new Callback() {
                     @Override
                     public void onSuccess() {
+                        busyIndicator.setVisibility(GONE);
                         image.setAlpha(0f);
                         image.animate().setDuration(400).alpha(1f).start();
                     }

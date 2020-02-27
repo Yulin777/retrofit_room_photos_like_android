@@ -19,7 +19,5 @@ public interface IAView {
 
     void setPresenter(IAPresenter photosPresenter);
 
-    LifecycleOwner getLifeCycleOwner();
-
     FragmentActivity getActivity();
 }

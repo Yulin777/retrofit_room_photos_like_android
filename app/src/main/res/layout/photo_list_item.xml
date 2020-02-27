@@ -41,4 +41,10 @@
         android:src="@drawable/empty_hart"
         tools:ignore="ContentDescription" />
 
+    <ProgressBar
+        android:id="@+id/busy_indicator"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"/>
+
 </androidx.cardview.widget.CardView>

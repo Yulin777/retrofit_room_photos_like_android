@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,11 +58,6 @@ public class AFrag extends Fragment implements IAView {
     @Override
     public void setPresenter(IAPresenter photosPresenter) {
         this.presenter = photosPresenter;
-    }
-
-    @Override
-    public LifecycleOwner getLifeCycleOwner() {
-        return this;
     }
 
 }

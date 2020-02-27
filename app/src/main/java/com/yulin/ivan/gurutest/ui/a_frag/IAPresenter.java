@@ -24,7 +24,5 @@ public interface IAPresenter {
 
     ViewModelStoreOwner getStoreOwner();
 
-    LifecycleOwner getLifeCycleOwner();
-
     void observePhoto(String id, Consumer<Photo> onUpdateReceived);
 }
